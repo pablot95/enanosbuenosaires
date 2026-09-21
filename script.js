@@ -90,6 +90,13 @@ function initNav() {
     toggle.setAttribute('aria-expanded', 'true'); document.body.classList.add('no-scroll');
     nav.querySelector('a')?.focus();
   };
+  const mq = window.matchMedia('(max-width:768px)');
+  const sync = () => {
+    if (mq.matches) { if (!nav.classList.contains('open')) nav.setAttribute('inert', ''); }
+    else { close(); nav.removeAttribute('inert'); }
+  };
+  sync();
+  mq.addEventListener('change', sync);
   toggle.addEventListener('click', () => (nav.classList.contains('open') ? close() : open()));
   closeBtn?.addEventListener('click', () => { close(); toggle.focus(); });
   bd.addEventListener('click', close);
